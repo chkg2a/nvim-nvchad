@@ -1,6 +1,5 @@
 require "nvchad.mappings"
 
-
 -- add yours here
 local map = vim.keymap.set
 
@@ -16,8 +15,8 @@ map("n", "<leader>fz", builtin.current_buffer_fuzzy_find, {})
 map("n", "<leader>cm", builtin.git_commits, {})
 map("n", "<leader>gt", builtin.git_status, {})
 map("n", "<leader>ma", builtin.marks, {})
-map("n", "<leader>fa", function() 
-  builtin.find_files({ follow = true, no_ignore = true, hidden = true }) 
+map("n", "<leader>fa", function()
+  builtin.find_files { follow = true, no_ignore = true, hidden = true }
 end, {})
 
 -- ui
@@ -48,20 +47,24 @@ map({ "n", "t" }, "<C-0>", function()
 end, { desc = "Terminal Toggle Floating term" })
 
 -- Yank Ring
-map({"n","x"}, "p", "<Plug>(YankyPutAfter)")
-map({"n","x"}, "P", "<Plug>(YankyPutBefore)")
-map({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
-map({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
+map({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+map({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+map({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
+map({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
 
 map("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
 map("n", "<c-n>", "<Plug>(YankyNextEntry)")
 
-map("n","<leader>p", function()
+map("n", "<leader>p", function()
   require("telescope").extensions.yank_history.yank_history()
-end,{})
+end, { desc = "Yank History" })
+
+-- undotree
+map("n", "<leader>u", "<cmd>UndotreeToggle<cr>", { desc = "Undo Tree" })
+map("n", "<A-u>", "<cmd>UndotreeToggle<cr>", { desc = "Undo Tree" })
 
 -- Zen
-map("n", "<leader>z", "<cmd> ZenMode <CR>")
+map("n", "<leader>z", "<cmd> ZenMode <CR>", { desc = "Zen Mode" })
 
 -- URL
-map("n", "gx", "<cmd>URLOpenUnderCursor <CR>")
+map("n", "gx", "<cmd>URLOpenUnderCursor <CR>", { desc = "Open URL" })

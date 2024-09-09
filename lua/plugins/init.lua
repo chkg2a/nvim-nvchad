@@ -7,7 +7,7 @@ return {
         ring = {
           history_length = 100,
           storage = "shada",
-          storage_path = vim.fn.stdpath "data" .. "/databases/yanky.db", -- Only for sqlite storage
+          storage_path = vim.fn.stdpath "data" .. "/databases/yanky.db",
           sync_with_numbered_registers = true,
           cancel_event = "update",
           ignore_registers = { "_" },
@@ -15,11 +15,11 @@ return {
         },
         picker = {
           select = {
-            action = nil, -- nil to use default put action
+            action = nil,
           },
           telescope = {
-            use_default_mappings = true, -- if default mappings should be used
-            mappings = nil, -- nil to use default mappings or no mappings (see `use_default_mappings`)
+            use_default_mappings = true,
+            mappings = nil,
           },
         },
         system_clipboard = {
@@ -110,7 +110,7 @@ return {
   },
   {
     "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    version = "*",
     event = "VeryLazy",
     config = function()
       require("nvim-surround").setup()
@@ -141,19 +141,15 @@ return {
       require("lspsaga").setup {}
     end,
     dependencies = {
-      "nvim-treesitter/nvim-treesitter", -- optional
-      "nvim-tree/nvim-web-devicons", -- optional
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
     },
   },
-  -- {
-  --   "windwp/nvim-autopairs",
-  --   event = "InsertEnter",
-  --   opts = {},
-  -- },
-  -- {
-  --   "folke/zen-mode.nvim",
-  --   cmd = { "ZenMode" },
-  -- },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
+  },
   {
     "ggandor/leap.nvim",
     dependencies = {
@@ -208,7 +204,7 @@ return {
         },
       },
       follow_url_func = function(url)
-        vim.fn.jobstart { "xdg-open", url } -- linux
+        vim.fn.jobstart { "xdg-open", url }
       end,
       wiki_link_func = function(opts)
         if opts.id == nil then
@@ -289,7 +285,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-        -- defaults
+
         "vim",
         "lua",
         "markdown",
@@ -328,7 +324,7 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    event = "BufWritePre", -- uncomment for format on save
+    event = "BufWritePre",
     opts = require "configs.conform",
   },
 }
