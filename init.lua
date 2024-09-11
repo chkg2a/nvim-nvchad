@@ -1,5 +1,7 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
+vim.g.vscode_snippets_path = "~/.config/nvim/lua/configs/snippets/"
 vim.opt.conceallevel = 2
+vim.o.scrolloff = 5
 vim.g.mapleader = " "
 
 -- bootstrap lazy and all plugins

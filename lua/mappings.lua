@@ -68,3 +68,6 @@ map("n", "<leader>z", "<cmd> ZenMode <CR>", { desc = "Zen Mode" })
 
 -- URL
 map("n", "gx", "<cmd>URLOpenUnderCursor <CR>", { desc = "Open URL" })
+
+-- neovim-project-manager
+map("n", "<leader>ss", "<cmd>Telescope neovim-project discover<cr>", { desc = "Open Projects" })
