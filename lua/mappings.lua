@@ -21,7 +21,9 @@ end, {})
 
 -- ui
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("n", "<leader><leader>v", "<cmd>vsplit<cr>", { desc = "Virtical Split" })
+map("n", "j", "gj", { desc = "go down easy" })
+map("n", "k", "gk", { desc = "go up easy" })
+map("n", "<leader>v", "<cmd>vsplit<cr>", { desc = "Virtical Split" })
 map("n", "<C-l>", "<C-w>l", { desc = "window left panel" })
 map("n", "<C-h>", "<C-w>h", { desc = "window right panel" })
 map("n", "<A-l>", "<C-w>l", { desc = "window left panel" })
