@@ -1,32 +1,32 @@
 return {
-  -- {
-  --   "andweeb/presence.nvim",
-  --   config = function()
-  --     require("presence").setup {
-  --       auto_update = true,
-  --       neovim_image_text = "The One True Text Editor",
-  --       main_image = "file",
-  --       client_id = "793271441293967371",
-  --       log_level = nil,
-  --       debounce_timeout = 4,
-  --       enable_line_number = false,
-  --       blacklist = {},
-  --       buttons = false,
-  --       file_assets = {},
-  --       show_time = true,
-  --
-  --       -- Rich Presence text options
-  --       editing_text = "Editing %s",
-  --       file_explorer_text = "Browsing %s",
-  --       git_commit_text = "Committing changes",
-  --       plugin_manager_text = "Managing plugins",
-  --       reading_text = "Reading %s",
-  --       workspace_text = "Working on %s",
-  --       line_number_text = "Line %s out of %s",
-  --     }
-  --   end,
-  --   lazy = false,
-  -- },
+  {
+    "andweeb/presence.nvim",
+    config = function()
+      require("presence").setup {
+        auto_update = true,
+        neovim_image_text = "The One True Text Editor",
+        main_image = "file",
+        client_id = "793271441293967371",
+        log_level = nil,
+        debounce_timeout = 4,
+        enable_line_number = false,
+        blacklist = {},
+        buttons = false,
+        file_assets = {},
+        show_time = true,
+
+        -- Rich Presence text options
+        editing_text = "Editing %s",
+        file_explorer_text = "Browsing %s",
+        git_commit_text = "Committing changes",
+        plugin_manager_text = "Managing plugins",
+        reading_text = "Reading %s",
+        workspace_text = "Working on %s",
+        line_number_text = "Line %s out of %s",
+      }
+    end,
+    lazy = false,
+  },
   {
     "coffebar/neovim-project",
     opts = {
@@ -62,12 +62,12 @@ return {
     end,
     ft = { "markdown" },
   },
-  {
-    "m4xshen/hardtime.nvim",
-    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    opts = {},
-    lazy = false,
-  },
+  -- {
+  --   "m4xshen/hardtime.nvim",
+  --   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+  --   opts = {},
+  --   lazy = false,
+  -- },
   {
     "gbprod/yanky.nvim",
     opts = {},
@@ -314,6 +314,15 @@ return {
             "cd $dir &&",
             "kotlinc $fileName &&",
             "kotlin $fileNameWithoutExtKt",
+          },
+          c = {
+            "cd '$dir' &&",
+            "gcc $fileName -o out.$fileNameWithoutExt -Ofast -march=native &&",
+            "/usr/bin/time -o memUsage.txt -f%M ./out.$fileNameWithoutExt &&",
+            "echo '' &&",
+            "cat memUsage.txt | awk '{printf \"Memory Usage: %.1f MB\\n\", $1/1024}' &&",
+            "rm ./out.$fileNameWithoutExt &&",
+            "rm ./memUsage.txt",
           },
           cpp = {
             "cd '$dir' &&",
