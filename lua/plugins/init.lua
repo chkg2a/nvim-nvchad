@@ -1,5 +1,16 @@
 return {
   {
+    "derektata/lorem.nvim",
+    config = function()
+      require("lorem").opts {
+        sentenceLength = "medium",
+        comma_chance = 0.2,
+        max_commas_per_sentence = 2,
+      }
+    end,
+    lazy = false,
+  },
+  {
     "andweeb/presence.nvim",
     config = function()
       require("presence").setup {
@@ -119,19 +130,24 @@ return {
     end,
     lazy = false,
   },
-  {
-    "monkoose/neocodeium",
-    event = "VeryLazy",
-    config = function()
-      local neocodeium = require "neocodeium"
-      neocodeium.setup()
-      vim.keymap.set("i", "<A-cr>", neocodeium.accept)
-    end,
-  },
+  -- {
+  --   "monkoose/neocodeium",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     local neocodeium = require "neocodeium"
+  --     neocodeium.setup()
+  --     vim.keymap.set("i", "<A-cr>", neocodeium.accept)
+  --   end,
+  -- },
   {
     "ahmedkhalf/project.nvim",
     config = function()
-      require("project_nvim").setup()
+      require("project_nvim").setup {
+        detection_methods = { "pattern" },
+        patterns = { ".git" },
+        ignore_lsp = {},
+        show_hidden = true,
+      }
     end,
     lazy = false,
   },
