@@ -123,13 +123,13 @@ return {
     end,
     lazy = false,
   },
-  {
-    "David-Kunz/gen.nvim",
-    config = function()
-      require("gen").setup {}
-    end,
-    lazy = false,
-  },
+  -- {
+  --   "David-Kunz/gen.nvim",
+  --   config = function()
+  --     require("gen").setup {}
+  --   end,
+  --   lazy = false,
+  -- },
   -- {
   --   "monkoose/neocodeium",
   --   event = "VeryLazy",
@@ -242,7 +242,6 @@ return {
           path = "~/.local/share/obsidian_ChK",
         },
       },
-
       templates = {
         subdir = "Templates",
         date_format = "%Y-%m-%d-%a",
@@ -298,19 +297,6 @@ return {
     config = function()
       require("code_runner").setup {
         filetype = {
-          go = {
-            "cd $dir &&",
-            "go run $fileName",
-          },
-          reactjs = {
-            "cd $dir &&",
-            "npm run dev",
-          },
-          kotlin = {
-            "cd $dir &&",
-            "kotlinc $fileName &&",
-            "kotlin $fileNameWithoutExtKt",
-          },
           c = {
             "cd '$dir' &&",
             "gcc $fileName -o out.$fileNameWithoutExt -Ofast -march=native &&",
@@ -329,27 +315,7 @@ return {
             "rm ./out.$fileNameWithoutExt &&",
             "rm ./memUsage.txt",
           },
-          java = {
-            "cd $dir &&",
-            "javac $fileName &&",
-            "java $fileNameWithoutExt",
-          },
           python = "python3 -u",
-          typescript = "deno run",
-          rust = {
-            "cd $dir &&",
-            "cargo build &&",
-            "cargo run",
-          },
-          js = {
-            "cd $dir &&",
-            "npm run dev",
-          },
-          cs = {
-            "cd $dir &&",
-            "mcs -out:$fileNameWithoutExt $fileName &&",
-            "$dir/$fileNameWithoutExt",
-          },
         },
       }
     end,
@@ -359,7 +325,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-
+        "bash",
+        "shell",
         "vim",
         "lua",
         "markdown",
