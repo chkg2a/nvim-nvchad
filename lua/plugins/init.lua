@@ -146,7 +146,7 @@ return {
         detection_methods = { "pattern" },
         patterns = { ".git" },
         ignore_lsp = {},
-        show_hidden = true,
+        show_hidden = false,
       }
     end,
     lazy = false,
