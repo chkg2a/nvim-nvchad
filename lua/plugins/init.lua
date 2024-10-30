@@ -302,13 +302,13 @@ return {
             "gcc $fileName -o out.$fileNameWithoutExt -Ofast -march=native &&",
             "/usr/bin/time -o memUsage.txt -f%M ./out.$fileNameWithoutExt &&",
             "echo '' &&",
-            "cat memUsage.txt | awk '{printf \"Memory Usage: %.1f MB\\n\", $1/1024}' &&",
+            "cat memUsage.txt | awk '{printf \"Memory Usage: %.1f MB\\n\", $1/1024}' -Lfn&&",
             "rm ./out.$fileNameWithoutExt &&",
             "rm ./memUsage.txt",
           },
           cpp = {
             "cd '$dir' &&",
-            "g++ $fileName -o out.$fileNameWithoutExt -Ofast -march=native -std=c++20 &&",
+            "g++ $fileName -o out.$fileNameWithoutExt -Ofast -march=native -std=c++20 -lfn&&",
             "/usr/bin/time -o memUsage.txt -f%M ./out.$fileNameWithoutExt &&",
             "echo '' &&",
             "cat memUsage.txt | awk '{printf \"Memory Usage: %.1f MB\\n\", $1/1024}' &&",
@@ -326,7 +326,6 @@ return {
     opts = {
       ensure_installed = {
         "bash",
-        "shell",
         "vim",
         "lua",
         "markdown",

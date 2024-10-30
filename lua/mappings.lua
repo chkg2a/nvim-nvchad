@@ -69,7 +69,7 @@ map("n", "<leader>z", "<cmd> ZenMode <CR>", { desc = "Zen Mode" })
 map("n", "gx", "<cmd>URLOpenUnderCursor <CR>", { desc = "Open URL" })
 
 -- -- neovim-project-manager
--- map("n", "<leader>ss", "<cmd>Telescope neovim-project discover<cr>", { desc = "Open Projects" })
+map("n", "<leader>fp", "<cmd>Telescope projects<cr>", { desc = "Open Projects" })
 
 -- obsidian
 map("n", "<A-s>", "<cmd> ObsidianSearch <CR>")
