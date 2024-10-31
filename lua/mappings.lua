@@ -74,8 +74,10 @@ map("n", "<leader>fp", "<cmd>Telescope projects<cr>", { desc = "Open Projects" }
 -- obsidian
 map("n", "<A-s>", "<cmd> ObsidianSearch <CR>")
 map("n", "<A-i>", "<cmd> ObsidianToday <CR>")
+map("n", "<A-t>", "<cmd> ObsidianTemplate <CR>")
 map("n", "<A-o>", "<cmd> ObsidianOpen <CR>")
-map("n", "<A-p>", "<cmd> ObsidianPasteImg <CR>")
+map("n", "<A-p>", "<cmd> ObsidianTOC <CR>")
 map("n", "<A-b>", "<cmd> ObsidianBacklinks <CR>")
 map("n", "<A-n>", "<cmd> ObsidianNew <CR>")
+map("n", "<A-l>","<cmd> ObsidianLinks <CR>")
 map("v", "<A-l>","<cmd> ObsidianLinkNew <CR>")
