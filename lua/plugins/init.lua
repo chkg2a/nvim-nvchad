@@ -2,7 +2,7 @@ return {
   {
     "ArcaneSpecs/HexEditor.nvim",
     config = function()
-      require("hexeditor").setup()
+      require("HexEditor").setup()
     end,
     lazy = false,
   },
@@ -64,6 +64,29 @@ return {
     "m4xshen/hardtime.nvim",
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
     opts = {},
+    config = function()
+      require("hardtime").setup {
+        restriction_mode = "block", -- block or hint
+        restricted_keys = {
+          ["h"] = { "n", "x" },
+          ["j"] = { "n", "x" },
+          ["k"] = { "n", "x" },
+          ["l"] = { "n", "x" },
+          ["+"] = { "n", "x" },
+          ["gj"] = { "n", "x" },
+          ["gk"] = { "n", "x" },
+          ["<C-M>"] = { "n", "x" },
+          ["<C-N>"] = { "n", "x" },
+          ["<C-P>"] = { "n", "x" },
+        },
+        disabled_keys = {
+          ["<Up>"] = { "", "i" },
+          ["<Down>"] = { "", "i" },
+          ["<Left>"] = { "", "i" },
+          ["<Right>"] = { "", "i" },
+        },
+      }
+    end,
     lazy = false,
   },
   {

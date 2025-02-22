@@ -17,8 +17,8 @@ map("n", "<leader>b", "")
 
 -- ui
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("n", "j", "gj", { desc = "go down easy" })
-map("n", "k", "gk", { desc = "go up easy" })
+-- map("n", "j", "gj", { desc = "go down easy" })
+-- map("n", "k", "gk", { desc = "go up easy" })
 map("n", "<leader>v", "<cmd>vsplit<cr>", { desc = "Virtical Split" })
 map({ "n", "t" }, "<C-l>", "<C-w>l", { desc = "window left panel" })
 map({ "n", "t" }, "<C-h>", "<C-w>h", { desc = "window right panel" })
@@ -83,3 +83,6 @@ map("n", "<A-v>", "<cmd> ObsidianBacklinks <CR>")
 map("n", "<A-b>", "<cmd> ObsidianBacklinks <CR>")
 map("n", "<A-n>", "<cmd> ObsidianNew <CR>")
 map("v", "<A-l>","<cmd> ObsidianLinkNew <CR>")
+
+-- HexEditor
+map("n", "<leader>h","<cmd> HexToggle <CR>")
