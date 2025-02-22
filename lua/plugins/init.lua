@@ -1,6 +1,10 @@
 return {
   {
     "ArcaneSpecs/HexEditor.nvim",
+    config = function()
+      require("hexeditor").setup()
+    end,
+    lazy = false,
   },
   {
     "derektata/lorem.nvim",
@@ -56,12 +60,12 @@ return {
     end,
     ft = { "markdown" },
   },
-  -- {
-  --   "m4xshen/hardtime.nvim",
-  --   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-  --   opts = {},
-  --   lazy = false,
-  -- },
+  {
+    "m4xshen/hardtime.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    opts = {},
+    lazy = false,
+  },
   {
     "gbprod/yanky.nvim",
     opts = {},
@@ -133,15 +137,15 @@ return {
   --   end,
   --   lazy = false,
   -- },
-  -- {
-  --   "monkoose/neocodeium",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     local neocodeium = require "neocodeium"
-  --     neocodeium.setup()
-  --     vim.keymap.set("i", "<A-cr>", neocodeium.accept)
-  --   end,
-  -- },
+  {
+    "monkoose/neocodeium",
+    event = "VeryLazy",
+    config = function()
+      local neocodeium = require "neocodeium"
+      neocodeium.setup()
+      vim.keymap.set("i", "<A-cr>", neocodeium.accept)
+    end,
+  },
   {
     "ahmedkhalf/project.nvim",
     config = function()
