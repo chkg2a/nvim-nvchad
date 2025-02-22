@@ -1,5 +1,8 @@
 return {
   {
+    "ArcaneSpecs/HexEditor.nvim",
+  },
+  {
     "derektata/lorem.nvim",
     config = function()
       require("lorem").opts {
@@ -248,7 +251,7 @@ return {
         time_format = "%H:%M",
       },
       daily_notes = {
-        folder = "dailies",
+        folder = "journaling",
         date_format = "%Y-%m-%d",
         alias_format = "%B %-d, %Y",
         template = nil,
@@ -302,13 +305,19 @@ return {
             "gcc $fileName -o out.$fileNameWithoutExt -Ofast -march=native &&",
             "/usr/bin/time -o memUsage.txt -f%M ./out.$fileNameWithoutExt &&",
             "echo '' &&",
-            "cat memUsage.txt | awk '{printf \"Memory Usage: %.1f MB\\n\", $1/1024}' -Lfn&&",
+            "cat memUsage.txt | awk '{printf \"Memory Usage: %.1f MB\\n\", $1/1024}' &&",
             "rm ./out.$fileNameWithoutExt &&",
             "rm ./memUsage.txt",
           },
+          java = {
+            "cd '$dir' &&",
+            "javac $fileName &&",
+            "java $fileNameWithoutExt &&",
+            "rm ./$fileNameWithoutExt.class &&",
+          },
           cpp = {
             "cd '$dir' &&",
-            "g++ $fileName -o out.$fileNameWithoutExt -Ofast -march=native -std=c++20 -lfn&&",
+            "g++ $fileName -std=c++23 -o out.$fileNameWithoutExt -Ofast -march=native -lfn&&",
             "/usr/bin/time -o memUsage.txt -f%M ./out.$fileNameWithoutExt &&",
             "echo '' &&",
             "cat memUsage.txt | awk '{printf \"Memory Usage: %.1f MB\\n\", $1/1024}' &&",

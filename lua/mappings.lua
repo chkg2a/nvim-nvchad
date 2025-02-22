@@ -4,6 +4,8 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 
 -- Remove default mappings
+map("n", "<A-h>", "")
+map("n", "<A-v>", "")
 map("n", "<C-n>", "")
 map("t", "<C-x>","")
 map("n", "<leader>v","")
@@ -28,7 +30,7 @@ map({ "n", "t" }, "<A-S-h>", "<cmd>2winc > <cr>", { desc = "increase window left
 map({ "n", "t" }, "<A-S-l>", "<cmd>2winc < <cr>", { desc = "increase window right panel" })
 map("n", "<C-5>", "<cmd>vimgrep /\\w\\+/j % | copen<cr>", { desc = "quick fix" })
 map("n", "<leader>e", "<cmd> NvimTreeToggle <CR>", { desc = "Nvim Tree" })
-map("n", "<leader>r", "<cmd> RunCode <CR>", { desc = "Run Code" })
+map("n", "<leader>r", "<C-w>l <cmd> RunCode <CR>", { desc = "Run Code" })
 -- map({ "n", "v" }, "<leader>]", ":Gen<CR>")
 
 -- Handle Terminals
@@ -77,7 +79,7 @@ map("n", "<A-i>", "<cmd> ObsidianToday <CR>")
 map("n", "<A-t>", "<cmd> ObsidianTemplate <CR>")
 map("n", "<A-o>", "<cmd> ObsidianOpen <CR>")
 map("n", "<A-p>", "<cmd> ObsidianTOC <CR>")
+map("n", "<A-v>", "<cmd> ObsidianBacklinks <CR>")
 map("n", "<A-b>", "<cmd> ObsidianBacklinks <CR>")
 map("n", "<A-n>", "<cmd> ObsidianNew <CR>")
-map("n", "<A-l>","<cmd> ObsidianLinks <CR>")
 map("v", "<A-l>","<cmd> ObsidianLinkNew <CR>")
