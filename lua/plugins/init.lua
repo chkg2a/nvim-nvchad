@@ -1,5 +1,58 @@
 return {
   {
+    "f-person/git-blame.nvim",
+    event = "VeryLazy",
+    opts = {
+      enabled = true,
+      message_template = " <summary> • <date> • <author> • <<sha>>",
+      date_format = "%m-%d-%Y %H:%M:%S",
+      virtual_text_column = 1,
+    },
+  },
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = { "kevinhwang91/promise-async" },
+    --    event = 'VeryLazy',   -- You can make it lazy-loaded via VeryLazy, but comment out if thing doesn't work
+    init = function()
+      vim.o.foldlevel = 99
+      vim.o.foldlevelstart = 99
+    end,
+    config = function()
+      require("ufo").setup {
+        -- your config goes here
+        -- open_fold_hl_timeout = ...,
+        -- provider_selector = function(bufnr, filetype)
+        --  ...
+        -- end,
+      }
+    end,
+    lazy = false,
+  },
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      -- Only one of these is needed.
+      "nvim-telescope/telescope.nvim", -- optional
+      "ibhagwan/fzf-lua", -- optional
+      "echasnovski/mini.pick", -- optional
+    },
+    config = true,
+    lazy = false,
+  },
+  {
+    "roobert/search-replace.nvim",
+    config = function()
+      require("search-replace").setup {
+        default_replace_single_buffer_options = "gcI",
+        default_replace_multi_buffer_options = "egcI",
+      }
+    end,
+    lazy = false,
+  },
+  {
     "ArcaneSpecs/HexEditor.nvim",
     config = function()
       require("HexEditor").setup()
@@ -18,31 +71,36 @@ return {
     lazy = false,
   },
   {
-    "andweeb/presence.nvim",
-    config = function()
-      require("presence").setup {
-        auto_update = true,
-        neovim_image_text = "The One True Text Editor",
-        main_image = "file",
-        client_id = "793271441293967371",
-        log_level = nil,
-        debounce_timeout = 4,
-        enable_line_number = false,
-        blacklist = {},
-        buttons = false,
-        file_assets = {},
-        show_time = true,
-
-        -- Rich Presence text options
-        editing_text = "Editing %s",
-        file_explorer_text = "Browsing %s",
-        git_commit_text = "Committing changes",
-        plugin_manager_text = "Managing plugins",
-        reading_text = "Reading %s",
-        workspace_text = "Working on %s",
-        line_number_text = "Line %s out of %s",
-      }
-    end,
+    "vyfor/cord.nvim",
+    build = ":Cord update",
+    opts = {
+      idle = {
+        enabled = true,
+        details = function(opts)
+          return string.format("Taking a break from %s", opts.workspace)
+        end,
+        timeout = 300000,
+      },
+      buttons = {
+        {
+          label = function(opts)
+            return opts.repo_url and "View Repository" or "View cord.nvim"
+          end,
+          url = function(opts)
+            return opts.repo_url or "https://github.com/vyfor/cord.nvim"
+          end,
+        },
+      },
+      text = {
+        editing = function(opts)
+          local text = "Editing " .. opts.filename
+          if vim.bo.modified then
+            text = text .. "[+]"
+          end
+          return text
+        end,
+      },
+    },
     lazy = false,
   },
   {
@@ -211,10 +269,10 @@ return {
       require("nvim-surround").setup()
     end,
   },
-  {
-    "f-person/git-blame.nvim",
-    lazy = false,
-  },
+  -- {
+  --   "f-person/git-blame.nvim",
+  --   lazy = false,
+  -- },
   {
     "folke/twilight.nvim",
   },
