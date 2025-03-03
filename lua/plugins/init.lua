@@ -57,7 +57,7 @@ return {
     config = function()
       require("HexEditor").setup()
     end,
-    lazy = false,
+    lazy = true,
   },
   {
     "derektata/lorem.nvim",
