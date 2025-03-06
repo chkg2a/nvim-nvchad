@@ -1,32 +1,34 @@
 return {
   {
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    lazy = false,
+  },
+  {
     "f-person/git-blame.nvim",
     event = "VeryLazy",
     opts = {
       enabled = true,
-      message_template = " <summary> • <date> • <author> • <<sha>>",
-      date_format = "%m-%d-%Y %H:%M:%S",
-      virtual_text_column = 1,
+      message_template = " <summary> • <date> • <author>",
+      date_format = "%m-%d-%Y",
+      virtual_text_column = 5,
     },
   },
   {
     "kevinhwang91/nvim-ufo",
     dependencies = { "kevinhwang91/promise-async" },
-    --    event = 'VeryLazy',   -- You can make it lazy-loaded via VeryLazy, but comment out if thing doesn't work
+    event = 'VeryLazy',   -- You can make it lazy-loaded via VeryLazy, but comment out if thing doesn't work
     init = function()
       vim.o.foldlevel = 99
       vim.o.foldlevelstart = 99
     end,
     config = function()
-      require("ufo").setup {
-        -- your config goes here
-        -- open_fold_hl_timeout = ...,
-        -- provider_selector = function(bufnr, filetype)
-        --  ...
-        -- end,
-      }
+      require("ufo").setup()
     end,
-    lazy = false,
   },
   {
     "NeogitOrg/neogit",
@@ -39,25 +41,22 @@ return {
       "ibhagwan/fzf-lua", -- optional
       "echasnovski/mini.pick", -- optional
     },
+    cmd = "Neogit",
     config = true,
-    lazy = false,
   },
   {
-    "roobert/search-replace.nvim",
+    "nvim-pack/nvim-spectre",
     config = function()
-      require("search-replace").setup {
-        default_replace_single_buffer_options = "gcI",
-        default_replace_multi_buffer_options = "egcI",
-      }
+      require("spectre").setup()
     end,
-    lazy = false,
+    cmd = "Spectre"
   },
   {
     "ArcaneSpecs/HexEditor.nvim",
+    cmd = "HexToggle",
     config = function()
       require("HexEditor").setup()
     end,
-    lazy = true,
   },
   {
     "derektata/lorem.nvim",
@@ -68,7 +67,7 @@ return {
         max_commas_per_sentence = 2,
       }
     end,
-    lazy = false,
+    cmd = "LoremIpsum",
   },
   {
     "vyfor/cord.nvim",
@@ -101,51 +100,14 @@ return {
         end,
       },
     },
-    lazy = false,
+    event = "VeryLazy",
   },
   {
     "gelguy/wilder.nvim",
     config = function()
       require("wilder").setup {}
     end,
-  },
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    build = "cd app && yarn install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    ft = { "markdown" },
-  },
-  {
-    "m4xshen/hardtime.nvim",
-    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    opts = {},
-    config = function()
-      require("hardtime").setup {
-        restriction_mode = "block", -- block or hint
-        restricted_keys = {
-          ["h"] = { "n", "x" },
-          ["j"] = { "n", "x" },
-          ["k"] = { "n", "x" },
-          ["l"] = { "n", "x" },
-          ["+"] = { "n", "x" },
-          ["gj"] = { "n", "x" },
-          ["gk"] = { "n", "x" },
-          ["<C-M>"] = { "n", "x" },
-          ["<C-N>"] = { "n", "x" },
-          ["<C-P>"] = { "n", "x" },
-        },
-        disabled_keys = {
-          ["<Up>"] = { "", "i" },
-          ["<Down>"] = { "", "i" },
-          ["<Left>"] = { "", "i" },
-          ["<Right>"] = { "", "i" },
-        },
-      }
-    end,
-    lazy = false,
+    event = "CmdlineEnter",
   },
   {
     "gbprod/yanky.nvim",
@@ -191,30 +153,23 @@ return {
   },
   {
     "folke/zen-mode.nvim",
-    lazy = false,
+    cmd = "ZenMode",
   },
   {
     "wakatime/vim-wakatime",
-    lazy = false,
-  },
-  {
-    "nvim-telescope/telescope-ui-select.nvim",
-    config = function()
-      require("telescope").setup {
-        extensions = {
-          ["ui-select"] = {
-            require("telescope.themes").get_dropdown {},
-          },
-        },
-      }
-      require("telescope").load_extension "ui-select"
-    end,
-    lazy = false,
+    event = "VeryLazy",
   },
   -- {
-  --   "David-Kunz/gen.nvim",
+  --   "nvim-telescope/telescope-ui-select.nvim",
   --   config = function()
-  --     require("gen").setup {}
+  --     require("telescope").setup {
+  --       extensions = {
+  --         ["ui-select"] = {
+  --           require("telescope.themes").get_dropdown {},
+  --         },
+  --       },
+  --     }
+  --     require("telescope").load_extension "ui-select"
   --   end,
   --   lazy = false,
   -- },
@@ -229,6 +184,7 @@ return {
   },
   {
     "ahmedkhalf/project.nvim",
+    event = "VeryLazy",
     config = function()
       require("project_nvim").setup {
         detection_methods = { "pattern" },
@@ -237,7 +193,6 @@ return {
         show_hidden = false,
       }
     end,
-    lazy = false,
   },
   {
     "folke/trouble.nvim",
@@ -269,16 +224,11 @@ return {
       require("nvim-surround").setup()
     end,
   },
-  -- {
-  --   "f-person/git-blame.nvim",
-  --   lazy = false,
-  -- },
   {
     "folke/twilight.nvim",
   },
   {
     "sontungexpt/url-open",
-    event = "VeryLazy",
     cmd = "URLOpenUnderCursor",
     config = function()
       local status_ok, url_open = pcall(require, "url-open")
@@ -297,24 +247,25 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
+    event = 'LspAttach'
   },
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {},
   },
-  {
-    "ggandor/leap.nvim",
-    dependencies = {
-      "tpope/vim-repeat",
-    },
-    config = function()
-      require("leap").add_default_mappings = false
-      vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
-      vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
-    end,
-    lazy = false,
-  },
+  -- {
+  --   "ggandor/leap.nvim",
+  --   dependencies = {
+  --     "tpope/vim-repeat",
+  --   },
+  --   config = function()
+  --     require("leap").add_default_mappings = false
+  --     vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+  --     vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
+  --   end,
+  --   lazy = false,
+  -- },
   {
     "epwalsh/obsidian.nvim",
     version = "*",
@@ -413,7 +364,7 @@ return {
         },
       }
     end,
-    lazy = false,
+    cmd = "RunCode"
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -447,14 +398,13 @@ return {
   },
   {
     "windwp/nvim-ts-autotag",
-    lazy = false,
     config = function()
       require("nvim-ts-autotag").setup()
     end,
+    lazy = false,
   },
   {
     "nvim-tree/nvim-tree.lua",
-    lazy = false,
   },
   {
     "stevearc/conform.nvim",

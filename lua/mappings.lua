@@ -51,7 +51,8 @@ map({ "n", "t" }, "<A-k>", "<C-w>k", { desc = "window down panel" })
 map({ "n", "t" }, "<A-S-h>", "<cmd>2winc > <cr>", { desc = "increase window left panel" })
 map({ "n", "t" }, "<A-S-l>", "<cmd>2winc < <cr>", { desc = "increase window right panel" })
 map("n", "<C-5>", "<cmd>vimgrep /\\w\\+/j % | copen<cr>", { desc = "quick fix" })
-map("n", "<leader>e", "<cmd> NvimTreeToggle <CR>", { desc = "Nvim Tree" })
+map("n", "<leader>E", "<cmd> NvimTreeToggle <CR>", { desc = "Nvim Tree" })
+map("n", "<leader>e", "<cmd> Oil <CR>", { desc = "Oil" })
 map("n", "<leader>r", "<C-w>l <cmd> RunCode <CR>", { desc = "Run Code" })
 -- map({ "n", "v" }, "<leader>]", ":Gen<CR>")
 
@@ -111,3 +112,17 @@ map("n", "<leader>h","<cmd> HexToggle <CR>")
 
 -- bro
 map("n", "<leader>fg","<cmd> Neogit <CR>")
+
+-- spectre
+vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
+    desc = "Toggle Spectre"
+})
+vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+    desc = "Search current word"
+})
+vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+    desc = "Search current word"
+})
+vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+    desc = "Search on current file"
+})
