@@ -38,9 +38,20 @@ require "nvchad.autocmds"
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
         if vim.fn.argc() == 0 then
-            vim.cmd("Telescope projects")  -- Replace with the command you want to run
+            vim.schedule(function()
+                vim.cmd("Oil")
+                vim.cmd("Telescope projects")
+            end)
         end
     end
+})
+
+-- Auto-reload Neovim when plugin files change
+vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = "lua/*.lua", -- Adjust this based on your config structure
+    callback = function()
+        vim.cmd("luafile %")
+    end,
 })
 
 vim.schedule(function()

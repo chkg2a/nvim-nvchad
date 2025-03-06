@@ -1,23 +1,16 @@
 require "nvchad.mappings"
 
-local opts = {}
-vim.api.nvim_set_keymap("v", "<C-r>", "<CMD>SearchReplaceSingleBufferVisualSelection<CR>", opts)
-vim.api.nvim_set_keymap("v", "<C-s>", "<CMD>SearchReplaceWithinVisualSelection<CR>", opts)
-vim.api.nvim_set_keymap("v", "<C-b>", "<CMD>SearchReplaceWithinVisualSelectionCWord<CR>", opts)
 
-vim.api.nvim_set_keymap("n", "<leader>rs", "<CMD>SearchReplaceSingleBufferSelections<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>ro", "<CMD>SearchReplaceSingleBufferOpen<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>rw", "<CMD>SearchReplaceSingleBufferCWord<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>rW", "<CMD>SearchReplaceSingleBufferCWORD<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>re", "<CMD>SearchReplaceSingleBufferCExpr<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>rf", "<CMD>SearchReplaceSingleBufferCFile<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>ro", [[:lua ReplaceChar()<CR>]], { noremap = true, silent = false })
 
-vim.api.nvim_set_keymap("n", "<leader>rbs", "<CMD>SearchReplaceMultiBufferSelections<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>rbo", "<CMD>SearchReplaceMultiBufferOpen<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>rbw", "<CMD>SearchReplaceMultiBufferCWord<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>rbW", "<CMD>SearchReplaceMultiBufferCWORD<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>rbe", "<CMD>SearchReplaceMultiBufferCExpr<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>rbf", "<CMD>SearchReplaceMultiBufferCFile<CR>", opts)
+function ReplaceChar()
+    local char_to_replace = vim.fn.input("Replace: ")
+    local new_char = vim.fn.input("With: ")
+    if char_to_replace ~= "" and new_char ~= "" then
+        vim.cmd(string.format("s/%s/%s/g", char_to_replace, new_char))
+        vim.cmd("nohlsearch")
+    end
+end
 
 -- show the effects of a search / replace in a live preview window
 vim.o.inccommand = "split"
@@ -53,7 +46,7 @@ map({ "n", "t" }, "<A-S-l>", "<cmd>2winc < <cr>", { desc = "increase window righ
 map("n", "<C-5>", "<cmd>vimgrep /\\w\\+/j % | copen<cr>", { desc = "quick fix" })
 map("n", "<leader>E", "<cmd> NvimTreeToggle <CR>", { desc = "Nvim Tree" })
 map("n", "<leader>e", "<cmd> Oil <CR>", { desc = "Oil" })
-map("n", "<leader>r", "<C-w>l <cmd> RunCode <CR>", { desc = "Run Code" })
+map("n", "<leader>r", ":w <CR> <cmd> RunCode <CR>", { desc = "Run Code" })
 -- map({ "n", "v" }, "<leader>]", ":Gen<CR>")
 
 -- Handle Terminals
@@ -72,9 +65,7 @@ end, { desc = "Terminal Toggle Floating term" })
 
 -- Yank Ring
 map({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
-map({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
-map({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
-map({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
+map({ "n", "x" }, "P", "<Plug>(YankyPutBefore)") map({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)") map({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
 
 map("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
 map("n", "<c-n>", "<Plug>(YankyNextEntry)")
@@ -110,11 +101,15 @@ map("v", "<A-l>","<cmd> ObsidianLinkNew <CR>")
 -- HexEditor
 map("n", "<leader>h","<cmd> HexToggle <CR>")
 
--- bro
+-- NeoGit
 map("n", "<leader>fg","<cmd> Neogit <CR>")
 
+-- LSP
+map("n", "<leader>rn","<cmd> lua vim.lsp.buf.rename() <CR>")
+map("n", "<leader>n","<cmd> lua vim.diagnostic.open_float() <CR>")
+
 -- spectre
-vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
+vim.keymap.set('n', '<leader>s', '<cmd>lua require("spectre").toggle()<CR>', {
     desc = "Toggle Spectre"
 })
 vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
