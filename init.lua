@@ -35,6 +35,14 @@ dofile(vim.g.base46_cache .. "statusline")
 require "options"
 require "nvchad.autocmds"
 
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        if vim.fn.argc() == 0 then
+            vim.cmd("Telescope projects")  -- Replace with the command you want to run
+        end
+    end
+})
+
 vim.schedule(function()
   require "mappings"
 end)

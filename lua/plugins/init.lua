@@ -1,5 +1,41 @@
 return {
   {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+        },
+      },
+      -- you can enable a preset for easier configuration
+      presets = {
+        bottom_search = true, -- use a classic bottom cmdline for search
+        command_palette = true, -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = false, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = false, -- add a border to hover docs and signature help
+      },
+    },
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+  },
+  {
+    "rcarriga/nvim-notify",
+    event = "VeryLazy",
+    config = function()
+      require("notify").setup {
+        background_colour = "#FFFFFF",
+        render = "compact",
+      }
+    end,
+  },
+  {
     "stevearc/oil.nvim",
     ---@module 'oil'
     ---@type oil.SetupOpts
@@ -21,7 +57,7 @@ return {
   {
     "kevinhwang91/nvim-ufo",
     dependencies = { "kevinhwang91/promise-async" },
-    event = 'VeryLazy',   -- You can make it lazy-loaded via VeryLazy, but comment out if thing doesn't work
+    event = "VeryLazy", -- You can make it lazy-loaded via VeryLazy, but comment out if thing doesn't work
     init = function()
       vim.o.foldlevel = 99
       vim.o.foldlevelstart = 99
@@ -29,6 +65,30 @@ return {
     config = function()
       require("ufo").setup()
     end,
+  },
+  {
+    "gelguy/wilder.nvim",
+    config = function()
+      local wilder = require "wilder"
+
+      -- Enable wilder.nvim for specific command-line modes
+      wilder.setup { modes = { "/", "?" } }
+
+      -- Set up the popup menu renderer
+      wilder.set_option(
+        "renderer",
+        wilder.popupmenu_renderer(wilder.popupmenu_palette_theme {
+          modes = { ":", "/", "?" },
+          border = "rounded",
+          max_height = "75%", -- Max height of the popup
+          min_height = 0, -- 0 allows dynamic height
+          prompt_position = "top", -- Position of the input prompt
+          reverse = 0, -- Set to 1 if you want the list reversed
+        })
+      )
+    end,
+    event = "CmdlineEnter",
+    lazy = false,
   },
   {
     "NeogitOrg/neogit",
@@ -49,7 +109,7 @@ return {
     config = function()
       require("spectre").setup()
     end,
-    cmd = "Spectre"
+    cmd = "Spectre",
   },
   {
     "ArcaneSpecs/HexEditor.nvim",
@@ -101,13 +161,6 @@ return {
       },
     },
     event = "VeryLazy",
-  },
-  {
-    "gelguy/wilder.nvim",
-    config = function()
-      require("wilder").setup {}
-    end,
-    event = "CmdlineEnter",
   },
   {
     "gbprod/yanky.nvim",
@@ -184,7 +237,6 @@ return {
   },
   {
     "ahmedkhalf/project.nvim",
-    event = "VeryLazy",
     config = function()
       require("project_nvim").setup {
         detection_methods = { "pattern" },
@@ -193,6 +245,7 @@ return {
         show_hidden = false,
       }
     end,
+    lazy = false,
   },
   {
     "folke/trouble.nvim",
@@ -247,7 +300,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
-    event = 'LspAttach'
+    event = "LspAttach",
   },
   {
     "windwp/nvim-autopairs",
@@ -364,7 +417,7 @@ return {
         },
       }
     end,
-    cmd = "RunCode"
+    cmd = "RunCode",
   },
   {
     "nvim-treesitter/nvim-treesitter",
