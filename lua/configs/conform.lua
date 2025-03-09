@@ -6,7 +6,7 @@ local options = {
     javascript = { "prettierd", "prettier", stop_after_first = true },
     javascriptreact = { "prettierd", "prettier", stop_after_first = true },
     cpp = { "clang-format" },
-    python = { "brunette" },
+    python = { "blue" },
   },
 
   -- format_on_save = {

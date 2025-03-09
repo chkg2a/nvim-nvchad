@@ -1,14 +1,55 @@
 return {
   {
+    "startup-nvim/startup.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-file-browser.nvim",
+    },
+    config = function()
+      require("startup").setup {
+        theme = "startify",
+      }
+      vim.g.startup_bookmarks = {
+        ["N"] = "~/.config/nvim/lua/plugins/init.lua",
+        ["C"] = "~/projects/college-programs/datasOnServer/",
+        ["W"] = "~/projects/websites/chill/",
+        ["D"] = "~/.local/share/clone/dwm/config.h",
+        ["A"] = "~/.local/bin/",
+      }
+    end,
+    event = "BufWinEnter",
+  },
+  {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
+      cmdline = {
+        format = {
+          -- Disable filter when using ":!"
+          cmdline = { pattern = "^:", icon = "", lang = "vim" },
+          search_down = { kind = "search", pattern = "^/", icon = "🔍", lang = "regex" },
+          search_up = { kind = "search", pattern = "^%?", icon = "🔍", lang = "regex" },
+          filter = false, -- Disabling filter behavior
+        },
+      },
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
           ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+        },
+        progress = {
+          enabled = true,
+          -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
+          -- See the section on formatting for more details on how to customize.
+          --- @type NoiceFormat|string
+          format = "lsp_progress",
+          --- @type NoiceFormat|string
+          format_done = "lsp_progress_done",
+          throttle = 700, -- frequency to update lsp progress message
+          view = "mini",
         },
       },
       -- you can enable a preset for easier configuration
@@ -67,30 +108,6 @@ return {
     config = function()
       require("ufo").setup()
     end,
-  },
-  {
-    "gelguy/wilder.nvim",
-    config = function()
-      local wilder = require "wilder"
-
-      -- Enable wilder.nvim for specific command-line modes
-      wilder.setup { modes = { "/", "?" } }
-
-      -- Set up the popup menu renderer
-      wilder.set_option(
-        "renderer",
-        wilder.popupmenu_renderer(wilder.popupmenu_palette_theme {
-          modes = { ":", "/", "?" },
-          border = "rounded",
-          max_height = "75%", -- Max height of the popup
-          min_height = 0, -- 0 allows dynamic height
-          prompt_position = "top", -- Position of the input prompt
-          reverse = 0, -- Set to 1 if you want the list reversed
-        })
-      )
-    end,
-    event = "CmdlineEnter",
-    lazy = false,
   },
   {
     "NeogitOrg/neogit",
@@ -404,7 +421,7 @@ return {
             "cd '$dir' &&",
             "javac $fileName &&",
             "java $fileNameWithoutExt &&",
-            "rm ./$fileNameWithoutExt.class &&",
+            "rm *.class &&",
           },
           cpp = {
             "cd '$dir' &&",

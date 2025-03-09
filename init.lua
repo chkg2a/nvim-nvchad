@@ -35,16 +35,16 @@ dofile(vim.g.base46_cache .. "statusline")
 require "options"
 require "nvchad.autocmds"
 
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        if vim.fn.argc() == 0 then
-            vim.schedule(function()
-                vim.cmd("Oil")
-                vim.cmd("Telescope projects")
-            end)
-        end
-    end
-})
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--     callback = function()
+--         if vim.fn.argc() == 0 then
+--             vim.schedule(function()
+--                 vim.cmd("Oil")
+--                 vim.cmd("Telescope projects")
+--             end)
+--         end
+--     end
+-- })
 
 -- Auto-reload Neovim when plugin files change
 vim.api.nvim_create_autocmd("BufWritePost", {

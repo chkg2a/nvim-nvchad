@@ -108,6 +108,9 @@ map("n", "<leader>fg","<cmd> Neogit <CR>")
 map("n", "<leader>rn","<cmd> lua vim.lsp.buf.rename() <CR>")
 map("n", "<leader>n","<cmd> lua vim.diagnostic.open_float() <CR>")
 
+-- NeoCodeium
+map("n", "<leader>b","<cmd> NeoCodeium toggle<CR>")
+
 -- spectre
 vim.keymap.set('n', '<leader>s', '<cmd>lua require("spectre").toggle()<CR>', {
     desc = "Toggle Spectre"
