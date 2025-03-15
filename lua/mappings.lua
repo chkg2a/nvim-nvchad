@@ -1,15 +1,14 @@
 require "nvchad.mappings"
 
-
 vim.api.nvim_set_keymap("n", "<leader>ro", [[:lua ReplaceChar()<CR>]], { noremap = true, silent = false })
 
 function ReplaceChar()
-    local char_to_replace = vim.fn.input("Replace: ")
-    local new_char = vim.fn.input("With: ")
-    if char_to_replace ~= "" and new_char ~= "" then
-        vim.cmd(string.format("s/%s/%s/g", char_to_replace, new_char))
-        vim.cmd("nohlsearch")
-    end
+  local char_to_replace = vim.fn.input "Replace: "
+  local new_char = vim.fn.input "With: "
+  if char_to_replace ~= "" and new_char ~= "" then
+    vim.cmd(string.format("s/%s/%s/g", char_to_replace, new_char))
+    vim.cmd "nohlsearch"
+  end
 end
 
 -- show the effects of a search / replace in a live preview window
@@ -22,11 +21,11 @@ local map = vim.keymap.set
 map("n", "<A-h>", "")
 map("n", "<A-v>", "")
 map("n", "<C-n>", "")
-map("t", "<C-x>","")
-map("n", "<leader>v","")
-map("n", "<leader>h","")
-map({ "n", "t" }, "<leader>h","")
-map({ "n", "t" }, "<leader>h","")
+map("t", "<C-x>", "")
+map("n", "<leader>v", "")
+map("n", "<leader>h", "")
+map({ "n", "t" }, "<leader>h", "")
+map({ "n", "t" }, "<leader>h", "")
 map({ "n", "t" }, "<A-i>", "")
 map("n", "<leader>b", "")
 
@@ -51,21 +50,23 @@ map("n", "<leader>r", ":w <CR> <cmd> RunCode <CR>", { desc = "Run Code" })
 
 -- Handle Terminals
 map({ "n", "t" }, "<C-8>", function()
-  vim.cmd("wincmd l")  -- Move to the right window
+  vim.cmd "wincmd l" -- Move to the right window
   require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
 end, { desc = "Terminal Toggle Floating term" })
 map({ "n", "t" }, "<C-9>", function()
-  vim.cmd("wincmd l")  -- Move to the right window
+  vim.cmd "wincmd l" -- Move to the right window
   require("nvchad.term").toggle { pos = "vsp", id = "vsplit", size = "0.3" }
 end, { desc = "Terminal Toggle Floating term" })
 map({ "n", "t" }, "<C-0>", function()
-  vim.cmd("wincmd l")  -- Move to the right window
+  vim.cmd "wincmd l" -- Move to the right window
   require("nvchad.term").toggle { pos = "sp", id = "split" }
 end, { desc = "Terminal Toggle Floating term" })
 
 -- Yank Ring
 map({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
-map({ "n", "x" }, "P", "<Plug>(YankyPutBefore)") map({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)") map({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
+map({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+map({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
+map({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
 
 map("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
 map("n", "<c-n>", "<Plug>(YankyNextEntry)")
@@ -96,31 +97,35 @@ map("n", "<A-p>", "<cmd> ObsidianTOC <CR>")
 map("n", "<A-v>", "<cmd> ObsidianBacklinks <CR>")
 map("n", "<A-b>", "<cmd> ObsidianBacklinks <CR>")
 map("n", "<A-n>", "<cmd> ObsidianNew <CR>")
-map("v", "<A-l>","<cmd> ObsidianLinkNew <CR>")
+map("v", "<A-l>", "<cmd> ObsidianLinkNew <CR>")
 
 -- HexEditor
-map("n", "<leader>h","<cmd> HexToggle <CR>")
+map("n", "<leader>h", "<cmd> HexToggle <CR>")
 
 -- NeoGit
-map("n", "<leader>fg","<cmd> Neogit <CR>")
+map("n", "<leader>fg", "<cmd> Neogit <CR>")
 
 -- LSP
-map("n", "<leader>rn","<cmd> lua vim.lsp.buf.rename() <CR>")
-map("n", "<leader>n","<cmd> lua vim.diagnostic.open_float() <CR>")
+map("n", "<leader>rn", "<cmd> lua vim.lsp.buf.rename() <CR>")
+map("n", "<leader>n", "<cmd> lua vim.diagnostic.open_float() <CR>")
 
 -- NeoCodeium
-map("n", "<leader>b","<cmd> NeoCodeium toggle<CR>")
+map("n", "<leader>b", "<cmd> NeoCodeium toggle<CR>")
+
+-- ufo
+map("n", "zR", require("ufo").openAllFolds)
+map("n", "zM", require("ufo").closeAllFolds)
 
 -- spectre
-vim.keymap.set('n', '<leader>s', '<cmd>lua require("spectre").toggle()<CR>', {
-    desc = "Toggle Spectre"
+map("n", "<leader>s", '<cmd>lua require("spectre").toggle()<CR>', {
+  desc = "Toggle Spectre",
 })
-vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-    desc = "Search current word"
+map("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+  desc = "Search current word",
 })
-vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-    desc = "Search current word"
+map("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+  desc = "Search current word",
 })
-vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-    desc = "Search on current file"
+map("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+  desc = "Search on current file",
 })
